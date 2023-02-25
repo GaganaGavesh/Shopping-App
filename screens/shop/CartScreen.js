@@ -10,7 +10,7 @@ const CartScreen = (props) => {
     <View>
       <View>
         <Text>
-          Total: <Text>${19.99}</Text>
+          Total: <Text>${cartTotalAmount}</Text>
         </Text>
         <Button title="Order Now" />
       </View>
