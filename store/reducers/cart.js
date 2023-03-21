@@ -34,6 +34,21 @@ export default (state = initialState, action) => {
           totalAmount: state.totalAmount + prodPrice,
         };
       }
+
+    case ADD_TO_CART:
+      const selectedCartItem = state.items[action.pid];
+      const currentQty = state.items[action.pid].quantity;
+
+      if (currentQty > 1) {
+        // need to reduce it
+        const updatedCartItem = new CartItem(
+          selectedCartItem.quantity - 1,
+          selectedCartItem.prodPrice,
+          selectedCartItem.prodTitle,
+          selectedCartItem.sum - selectedCartItem.prodPrice
+        );
+      } else {
+      }
   }
   //[] we can add or access a dynamic key in a object(vanilla js)
   return state;

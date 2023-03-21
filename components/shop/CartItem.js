@@ -12,11 +12,11 @@ const CartItem = (props) => {
   return (
     <View style={StyleSheet.cartItem}>
       <Text style={StyleSheet.itemData}>
-        <Text style={StyleSheet.quantity}>QTY</Text>{" "}
-        <Text style={StyleSheet.title}>TITLE</Text>
+        <Text style={StyleSheet.quantity}>{props.quantity}</Text>{" "}
+        <Text style={StyleSheet.mainText}>{props.title}</Text>
       </Text>
       <View style={StyleSheet.itemData}>
-        <Text style={StyleSheet.amount}>$AMT</Text>
+        <Text style={StyleSheet.mainText}>{props.amount.toFixed(2)}</Text>
         <TouchableOpacity
           onPress={props.onRemove}
           style={StyleSheet.deleteButton}
@@ -31,6 +31,8 @@ const CartItem = (props) => {
   );
 };
 
+export default CartItem;
+
 const styles = StyleSheet.create({
   cartItem: {
     padding: 10,
@@ -39,9 +41,17 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginHorizontal: 20,
   },
-  itemData: {},
-  quantity: {},
-  title: {},
+  itemData: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  quantity: {
+    color: "#888",
+    fontSize: 16,
+  },
+  mainText: {
+    fontSize: 16,
+  },
   amount: {},
   deleteButton: {
     marginLeft: 20,

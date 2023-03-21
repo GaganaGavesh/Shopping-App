@@ -1,6 +1,9 @@
 import React from "react";
 import { View, Text, FlatList, StyleSheet, Button } from "react-native-web";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import CartItem from "../../components/shop/CartItem";
+import * as cartActions from "../../store/actions/cart";
 
 //we can use nested Text tags so that we can give them different styles colors so on.
 
@@ -24,6 +27,7 @@ const CartScreen = (props) => {
     return transformedCartItems;
   });
 
+  const dispatch = useDispatch();
   return (
     <View>
       <View>
@@ -32,9 +36,20 @@ const CartScreen = (props) => {
         </Text>
         <Button title="Order Now" />
       </View>
-      <View>
-        <Text>Cart Items</Text>
-      </View>
+      <FlatList
+        data={cartItems}
+        keyExtractor={(item) => item.productId}
+        renderItem={(itemData) => (
+          <CartItem
+            quantity={itemData.item.quantity}
+            title={itemData.item.productTitle}
+            amount={itemData.item.sum}
+            onRemove={() => {
+              dispatch(cartActions.removeFromCart(itemData.item.productId));
+            }}
+          />
+        )}
+      />
     </View>
   );
 };
